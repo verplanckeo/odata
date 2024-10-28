@@ -47,5 +47,5 @@ jobs:
           az deployment sub create \
             --name rg-deployment-${{ github.run_id }} \
             --location ${{ env.AZURE_LOCATION }} \
-            --template-file '../deployment/iac/main.bicep' \
+            --template-file '../../deployment/iac/main.bicep' \
             --parameters namePrefix=${{ env.AZURE_RESOURCE_PREFIX }} environment=${{ env.AZURE_ENVIRONMENT }}
