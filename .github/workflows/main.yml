@@ -26,8 +26,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Bicep CLI
-        uses: azure/bicep-install@v1
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Install Bicep CLI
+        run: |
+          az bicep install
 
       - name: Azure Login with OpenID Connect
         uses: azure/login@v1
