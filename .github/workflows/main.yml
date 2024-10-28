@@ -10,9 +10,9 @@ on:
 
 env:
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  AZURE_RESOURCE_PREFIX: "my-prefix" # Set your own resource prefix here
-  AZURE_ENVIRONMENT: "production" # Adjust based on your target environment (e.g., dev, test, prod)
-  AZURE_LOCATION: "WestUS" # Update this location based on your needs
+  AZURE_RESOURCE_PREFIX: "odata" # Set your own resource prefix here
+  AZURE_ENVIRONMENT: "dev" # Adjust based on your target environment (e.g., dev, test, prod)
+  AZURE_LOCATION: "westeurope" # Update this location based on your needs
 
 jobs:
   deploy:
