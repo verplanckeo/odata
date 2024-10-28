@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
-param namePrefix string = 'odata'
-param environment string = 'dev'
+param namePrefix string
+param environment string
 
 module rg './resource-group/resource-group.bicep' = {
   name: 'rg-deployment'
