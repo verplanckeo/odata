@@ -2,23 +2,12 @@ param location string
 param applicationName string
 param environment string
 
-module shortener '../modules/locationShortener.bicep' = {
-    name: 'regionShortener'
-    params: {
-        resourceName: 'kv'
-        applicationName: applicationName
-        environment: environment
-    }    
-}
-
-var keyVaultName = shortener.outputs.resourceShortName
-
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
-    name: keyVaultName
+    name: 'kv-${applicationName}-euw-${environment}'
     location: location
     properties: {
         sku: {
-            family: 'A',
+            family: 'A'
             name: 'standard'
         }
         tenantId: subscription().tenantId
