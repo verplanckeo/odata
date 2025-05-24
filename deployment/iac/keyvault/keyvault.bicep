@@ -5,7 +5,6 @@ param environment string
 module shortener '../modules/locationShortener.bicep' = {
     name: 'regionShortener'
     params: {
-        location: location
         resourceName: 'kv'
         applicationName: applicationName
         environment: environment
