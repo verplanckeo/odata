@@ -10,7 +10,6 @@ param applicationName string
 @description('Environment name (e.g.: dev, prod)')
 param environment string
 
-
 var locationShortMap = {
     westeurope: 'weu'
     northeurope: 'neu'
@@ -25,11 +24,7 @@ var locationShortMap = {
     // Extend new regions if needed
 }
 
-var normalizedLocation = toLower(replace(location, ' ', ''))
-
-var locationShort = contains(locationShortMap, normalizedLocation)
-    ? locationShortMap[normalizedLocation]
-    : normalizedLocation
+var locationShort = locationShortMap[location]
     
 output short string = locationShort
 output resourceShortName string = '${resourceName}-${applicationName}-${locationShort}-${environment}'
