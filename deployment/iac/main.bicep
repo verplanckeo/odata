@@ -4,19 +4,14 @@ param location string
 param applicationName string
 param environment string
 
-module rg './resource-group/resource-group.bicep' = {
-  name: 'rg-deployment'
-  scope: subscription()
-  params: {
-        location: location
-        applicationName: applicationName
-        environment: environment
-  }
+resource rg 'Microsoft.Resources/resourceGroups@2025-04-01' = {
+  name: 'rg-${applicationName}-euw-${environment}'
+  location: location
 }
 
 module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
-    scope: resourceGroup(rg.outputs.resourceGroupName)
+    scope: resourceGroup(rg)
     params: {
         location: rg.outputs.location
         applicationName: applicationName
