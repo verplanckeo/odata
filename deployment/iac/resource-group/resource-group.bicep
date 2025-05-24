@@ -9,6 +9,8 @@ module shortener '../modules/locationShortener.bicep' = {
     params: {
         location: location
         resourceName: 'rg'
+        applicationName: applicationName
+        environment: environment
     }    
 }
 

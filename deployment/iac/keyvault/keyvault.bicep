@@ -7,6 +7,8 @@ module shortener '../modules/locationShortener.bicep' = {
     params: {
         location: location
         resourceName: 'kv'
+        applicationName: applicationName
+        environment: environment
     }    
 }
 
