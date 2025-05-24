@@ -5,16 +5,16 @@ param location string
 param resourceName string
 
 var locationShortMap = {
-    'westeurope': 'weu'
-    'northeurope': 'neu'
-    'eastus': 'eus'
-    'westus': 'wus'
-    'westus2': 'wus2'
-    'westus3': 'wus3'
-    'southcentralus': 'scus'
-    'eastasia': 'ea',
-    'australiaeast': 'aue'
-    'australiasouteast': 'ause'
+    westeurope: 'weu'
+    northeurope: 'neu'
+    eastus: 'eus'
+    westus: 'wus'
+    westus2: 'wus2'
+    westus3: 'wus3'
+    southcentralus: 'scus'
+    eastasia: 'ea'
+    australiaeast: 'aue'
+    australiasouteast: 'ause'
     // Extend new regions if needed
 }
 
