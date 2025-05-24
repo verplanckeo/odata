@@ -11,7 +11,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2025-04-01' = {
 
 module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
-    scope: resourceGroup(rg)
+    scope: resourceGroup(rg.name)
     params: {
         location: rg.outputs.location
         applicationName: applicationName
