@@ -13,7 +13,7 @@ module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
     scope: resourceGroup(rg.name)
     params: {
-        location: rg.outputs.location
+        location: rg.location
         applicationName: applicationName
         environment: environment
     }
