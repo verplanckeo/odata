@@ -32,4 +32,4 @@ var locationShort = contains(locationShortMap, normalizedLocation)
     : normalizedLocation
     
 output short string = locationShort
-output resourceShortName = '${resourceName}-${applicationName}-${shortener.outputs.short}'
+output resourceShortName string = '${resourceName}-${applicationName}-${shortener.outputs.short}-${environment}'
