@@ -1,3 +1,5 @@
+targetScope = 'subscription'
+
 param location string
 param applicationName string
 param environment string
