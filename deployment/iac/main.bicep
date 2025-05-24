@@ -13,13 +13,13 @@ module rg './resource-group/resource-group.bicep' = {
         environment: environment
   }
 }
-/*
+
 module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
-    scope: rg
+    scope: resourceGroup(rg.outputs.resourceGroupName)
     params: {
         location: rg.outputs.location
         applicationName: applicationName
         environment: environment
     }
-}*/
+}
