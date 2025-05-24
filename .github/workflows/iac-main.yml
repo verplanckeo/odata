@@ -10,7 +10,7 @@ on:
 
 env:
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  AZURE_RESOURCE_PREFIX: "odata" # Set your own resource prefix here
+  AZURE_RESOURCE_APPLICATION_NAME: "odata" # Set your own resource prefix here
   AZURE_ENVIRONMENT: "dev" # Adjust based on your target environment (e.g., dev, test, prod)
   AZURE_LOCATION: "westeurope" # Update this location based on your needs
 
@@ -48,4 +48,4 @@ jobs:
             --name rg-deployment-${{ github.run_id }} \
             --location ${{ env.AZURE_LOCATION }} \
             --template-file 'deployment/iac/main.bicep' \
-            --parameters namePrefix=${{ env.AZURE_RESOURCE_PREFIX }} environment=${{ env.AZURE_ENVIRONMENT }}
+            --parameters location=${{ env.AZURE_LOCATION }} applicationName=${{ env.AZURE_RESOURCE_APPLICATION_NAME }} environment=${{ env.AZURE_ENVIRONMENT }}
