@@ -1,0 +1,13 @@
+﻿services:
+  webapplication1:
+    image: webapplication1
+    build:
+      context: .
+      dockerfile: WebApplication1/Dockerfile
+
+  odata.api:
+    image: odata.api
+    build:
+      context: .
+      dockerfile: OData.Api/Dockerfile
+

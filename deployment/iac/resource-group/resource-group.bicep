@@ -1,9 +1,23 @@
 targetScope = 'subscription'
 
-param namePrefix string
+param location string
+param applicationName string
 param environment string
 
-resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: 'rg-${namePrefix}-euw-${environment}'
-  location: 'westeurope'
+module shortener '../modules/locationShortener.bicep' = {
+    name: 'regionShortener'
+    params: {
+        location: location
+        resourceName: 'rg'
+    }    
 }
+
+var resourceGroupName = shortener.outputs.resourceShortName
+
+resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
+  name: resourceGroupName
+  location: location
+}
+
+output resourceGroupName string = rg.name
+output location string = rg.location
