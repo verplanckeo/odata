@@ -6,14 +6,28 @@ param environment string
 
 //Bicep does not allow accessing outputs from a module declared at a different scope (like subscription → resource group)
 var rgName = 'rg-${applicationName}-euw-${environment}'
+
+// Step 1: Create the Resource Group (subscription scope)
 module rg './resource-group/resource-group.bicep' = {
     name: 'resourcegroup-deployment'
     params: {
-        location: rg.location
+        location: location
         name: rgName
     }
 }
 
+// Step 2: Deploy App Service into that resource group
+module appService = './app-service/app-service.bicep' = {
+    name: 'appservice-deployment'
+    scope: resourceGroup(rgName)
+    params: {
+        applicationName: applicationName
+        environment: environment
+        location: location
+    }
+}
+
+// Step 3: Deploy Key Vault into the same resource group
 module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
     scope: resourceGroup(rgName)
@@ -21,5 +35,15 @@ module keyVault './keyvault/keyvault.bicep' = {
         location: rg.location
         applicationName: applicationName
         environment: environment
+    }
+}
+
+// Step 4: Assign RBAC to App Service on Key Vault (also scoped to RG)
+module keyVaultRbac './keyvault/keyvault-rbac.bicep' = {
+    name: 'keyvault-rbac-deployment'
+    scope: resourceGroup(rgName)
+    params: {
+        keyVaultId: keyVault.outputs.keyVaultId
+        principalId: appService.outputs.appServicePrincipalId
     }
 }
