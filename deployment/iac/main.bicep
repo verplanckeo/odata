@@ -17,6 +17,17 @@ module rg './resource-group/resource-group.bicep' = {
 }
 
 // Deploy App Service into that resource group
+module appInsights './application-insights/application-insights.bicep' = {
+    name: 'applicationinsights-deployment'
+    scope: resourceGroup(rgName)
+    params: {
+        applicationName: applicationName
+        environment: environment
+        location: rg.outputs.location
+    }
+}
+
+// Deploy App Service into that resource group
 module appService './app-service/app-service.bicep' = {
     name: 'appservice-deployment'
     scope: resourceGroup(rgName)
@@ -24,6 +35,7 @@ module appService './app-service/app-service.bicep' = {
         applicationName: applicationName
         environment: environment
         location: rg.outputs.location
+        applicationInsightsConnectionString: appInsights.outputs.connectionString
     }
 }
 

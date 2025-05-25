@@ -1,9 +1,10 @@
 param applicationName string
 param environment string
 param location string
+param applicationInsightsConnectionString
 
-var appServicePlanName = 'asp-${applicationName}-${environment}'
-var appServiceName = 'app-${applicationName}-${environment}'
+var appServicePlanName = 'asp-${applicationName}-euw-${environment}'
+var appServiceName = 'app-${applicationName}-euw-${environment}'
 
 // App Service Plan (required to host the App Service)
 resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
@@ -39,7 +40,13 @@ resource appService 'Microsoft.Web/sites@2024-04-01' = {
             alwaysOn: false
             http20Enabled: false
             functionAppScaleLimit: 0
-        }
+            appSettings: [
+                {
+                    name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+                    value: applicationInsightsConnectionString
+                }
+            ]
+        }            
         httpsOnly: true
     }
 }
