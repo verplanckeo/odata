@@ -16,16 +16,6 @@ module rg './resource-group/resource-group.bicep' = {
     }
 }
 
-// Register an app in app registrations
-module ar './app-registration/app-registration.bicep' = {
-    name: 'app-registration'
-    scope: tenant() // Required for Microsoft.Graph modules
-    params: {
-        applicationName: applicationName
-        environment: environment
-    }
-}
-
 // Deploy App Service into that resource group
 module appService './app-service/app-service.bicep' = {
     name: 'appservice-deployment'
@@ -45,15 +35,6 @@ module keyVault './keyvault/keyvault.bicep' = {
         location: rg.location
         applicationName: applicationName
         environment: environment
-    }
-}
-
-// Assign RBAC to App Service on Key Vault (also scoped to RG)
-module keyVaultRbac './keyvault/keyvault-rbac.bicep' = {
-    name: 'keyvault-rbac-deployment'
-    scope: resourceGroup(rgName)
-    params: {
-        keyVaultId: keyVault.outputs.keyVaultId
         principalId: appService.outputs.appServicePrincipalId
     }
 }

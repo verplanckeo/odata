@@ -12,7 +12,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
     sku: {
         name: 'B1'
         tier: 'Basic'
-        size: 'B1',
+        size: 'B1'
         family: 'B'
         capacity: 1
     }
