@@ -4,14 +4,19 @@ param location string
 param applicationName string
 param environment string
 
-resource rg 'Microsoft.Resources/resourceGroups@2025-04-01' = {
-  name: 'rg-${applicationName}-euw-${environment}'
-  location: location
+//Bicep does not allow accessing outputs from a module declared at a different scope (like subscription → resource group)
+var rgName = 'rg-${applicationName}-euw-${environment}'
+module rg './resource-group/resource-group.bicep' = {
+    name: 'resourcegroup-deployment'
+    params: {
+        location: rg.location
+        name: rgName
+    }
 }
 
 module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
-    scope: resourceGroup(rg.name)
+    scope: resourceGroup(rgName)
     params: {
         location: rg.location
         applicationName: applicationName
