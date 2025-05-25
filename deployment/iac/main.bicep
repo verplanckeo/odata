@@ -23,7 +23,7 @@ module appService './app-service/app-service.bicep' = {
     params: {
         applicationName: applicationName
         environment: environment
-        location: location
+        location: rg.outputs.location
     }
 }
 
@@ -32,7 +32,7 @@ module keyVault './keyvault/keyvault.bicep' = {
     name: 'keyvault-deployment'
     scope: resourceGroup(rgName)
     params: {
-        location: rg.location
+        location: rg.outputs.location
         applicationName: applicationName
         environment: environment
         principalId: appService.outputs.appServicePrincipalId
