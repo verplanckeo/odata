@@ -19,6 +19,7 @@ module rg './resource-group/resource-group.bicep' = {
 // Register an app in app registrations
 module ar './app-registration/app-registration.bicep' = {
     name: 'app-registration'
+    scope: tenant() // Required for Microsoft.Graph modules
     params: {
         applicationName: applicationName
         environment: environment
