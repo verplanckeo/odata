@@ -1,7 +1,7 @@
 param applicationName string
 param environment string
 param location string
-param applicationInsightsConnectionString
+param applicationInsightsConnectionString  string
 
 var appServicePlanName = 'asp-${applicationName}-euw-${environment}'
 var appServiceName = 'app-${applicationName}-euw-${environment}'
